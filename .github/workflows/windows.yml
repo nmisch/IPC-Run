@@ -33,17 +33,6 @@ jobs:
           "C:\strawberry\perl\bin" >>$Env:GITHUB_PATH
           "C:\strawberry\perl\site\bin" >>$Env:GITHUB_PATH
           "C:\strawberry\c\bin" >>$Env:GITHUB_PATH
-          "C:\nosuch1" >>$Env:GITHUB_PATH
-          "C:\nosuch2" >>$Env:GITHUB_PATH
-          echo $Env:GITHUB_PATH
-          echo $Env:Path
-          dir env:
-          Get-Variable
-      - name: Confirm PATH
-        run: |
-          echo $Env:Path
-          dir env:
-          Get-Variable
       - name: perl -V
         run: perl -V
       - name: Makefile.PL
