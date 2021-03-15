@@ -37,8 +37,11 @@ jobs:
           echo C:\nosuch2 >>$GITHUB_PATH
           echo $GITHUB_PATH
           echo $Env:Path
+          dir env:
       - name: Confirm PATH
-        run: echo $Env:Path
+        run: |
+          echo $Env:Path
+          dir env:
       - name: perl -V
         run: perl -V
       - name: Makefile.PL
