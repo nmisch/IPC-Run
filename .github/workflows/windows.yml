@@ -34,6 +34,8 @@ jobs:
           echo 'C:\strawberry\perl\site\bin' >>$GITHUB_PATH
           echo 'C:\strawberry\c\bin' >>$GITHUB_PATH
           echo "$PATH"
+      - name: Confirm PATH
+        run: echo "$PATH"
       - name: perl -V
         run: perl -V
       - name: Makefile.PL
