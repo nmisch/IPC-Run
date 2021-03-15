@@ -27,15 +27,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@master
-      - name: Set up Perl
-        run: |
-          "This is now installed by default and is already in the path.  No
-          other Perl is in the path.  Hence, these commands provide
-          future-proofing only."
-          choco install strawberryperl
-          "C:\strawberry\perl\bin" >>$Env:GITHUB_PATH
-          "C:\strawberry\perl\site\bin" >>$Env:GITHUB_PATH
-          "C:\strawberry\c\bin" >>$Env:GITHUB_PATH
       - name: perl -V
         run: perl -V
       - name: Makefile.PL
