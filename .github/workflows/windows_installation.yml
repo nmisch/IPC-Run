@@ -1,12 +1,8 @@
 name: Windows_Installation
 
 on:
-  push:
-    branches:
-      - '*'
-    tags-ignore:
-      - '*foo*'
-  pull_request:
+  schedule:
+    - cron: '32 4 * * 1'
 
 jobs:
   build:
