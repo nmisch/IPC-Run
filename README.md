@@ -1786,3 +1786,4 @@ Copyright 1999 Barrie Slaymaker.
 
 You may distribute under the terms of either the GNU General Public
 License or the Artistic License, as specified in the README file.
+
