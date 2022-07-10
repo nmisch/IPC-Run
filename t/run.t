@@ -38,7 +38,7 @@ sub get_warnings {
 select STDERR;
 select STDOUT;
 
-use Test::More tests => 272;
+use Test::More tests => 7004;
 use IPC::Run::Debug qw( _map_fds );
 use IPC::Run qw( :filters :filter_imp start );
 
@@ -800,6 +800,9 @@ SKIP: {
     eok( $err, uc($text) );
 }
 
+# repeat flaky tests
+for (1 .. 100) {
+
 ##
 ## Pipelining
 ##
@@ -949,6 +952,7 @@ eok( $in,  '' );
 eok( $out, $text );
 eok( $err, uc($text) );
 ok( !$h->pumpable );
+}
 
 $in  = $text;
 $out = 'REPLACE ME';
