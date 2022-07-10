@@ -17,6 +17,10 @@ jobs:
       RELEASE_TESTING: 0
       GITHUB_WINDOWS_TESTING: 1
       PERL_SIGNALS: unsafe
+      IPCRUNDEBUG: details
+      HARNESS_PERL_SWITCHES: -Ixlib -MTime::Limit=-group,-verbose,1
+      HARNESS_VERBOSE: true
+      HARNESS_TIMER: true
 
     runs-on: windows-latest
 
