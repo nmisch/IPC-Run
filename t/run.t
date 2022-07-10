@@ -33,7 +33,7 @@ sub get_warnings {
     return @warnings;
 }
 
-alarm 60;
+alarm 180;
 
 ## Handy to have when our output is intermingled with debugging output sent
 ## to the debugging fd.
