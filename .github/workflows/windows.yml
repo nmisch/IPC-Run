@@ -26,9 +26,13 @@ jobs:
 
     steps:
       - uses: actions/checkout@master
+      - run: dir c:\
+      - run: dir c:\msys64
+      - run: dir c:\msys64\usr
+      - run: dir c:\msys64\usr\bin
       - name: perl -V
         run: perl -V
       - name: Makefile.PL
         run: perl Makefile.PL
       - name: make test
-        run: make test
+        run: c:\msys64\usr\bin\timeout -k5 1 make test
