@@ -33,14 +33,12 @@ sub get_warnings {
     return @warnings;
 }
 
-alarm 60;
-
 ## Handy to have when our output is intermingled with debugging output sent
 ## to the debugging fd.
 select STDERR;
 select STDOUT;
 
-use Test::More tests => 288;
+use Test::More tests => 7020;
 use IPC::Run::Debug qw( _map_fds );
 use IPC::Run qw( :filters :filter_imp start );
 
@@ -941,6 +939,8 @@ SKIP: {
     eok( $err, uc($text) );
 }
 
+for (1 .. 100) {
+
 ##
 ## Pipelining
 ##
@@ -1090,6 +1090,7 @@ eok( $in,  '' );
 eok( $out, $text );
 eok( $err, uc($text) );
 ok( !$h->pumpable );
+}
 
 $in  = $text;
 $out = 'REPLACE ME';
