@@ -16,7 +16,6 @@ jobs:
       AUTOMATED_TESTING: 1
       RELEASE_TESTING: 0
       GITHUB_WINDOWS_TESTING: 1
-      PERL_SIGNALS: unsafe
 
     runs-on: windows-latest
 
@@ -32,4 +31,4 @@ jobs:
       - name: Makefile.PL
         run: perl Makefile.PL
       - name: make test
-        run: make test TEST_FILES='-Ixlib -MTime::Limit=-group,-verbose,180 t/*.t'
+        run: make test
