@@ -32,4 +32,4 @@ jobs:
       - name: Makefile.PL
         run: perl Makefile.PL
       - name: make test
-        run: make test
+        run: make test TEST_FILES='-Ixlib -MTime::Limit=-group,-verbose,1 t/*.t'
