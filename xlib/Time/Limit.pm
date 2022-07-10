@@ -38,13 +38,26 @@ sub import
 			{
 				carp("Process $parent timed out!") unless $opts{quiet};
 				
-				my $signal = 9;
-				if ($opts{group}) {
-					carp("Sending -$signal to $parent") unless $opts{quiet};
-					kill(-$signal, $parent);
+				my $counter = 2_000_000;
+				
+				# While we can still reach the parent process
+				while ( kill(0, $parent) )
+				{
+					# Send it a signal to end
+					my $signal = ($counter > 1_000_000) ? 15 : 9;
+					if ($opts{group}) {
+						carp("Sending -$signal to $parent") unless $opts{quiet};
+						kill(-$signal, $parent);
+					}
+					carp("Sending $signal to $parent") unless $opts{quiet};
+					kill($signal, $parent);
+					
+					# Sleep for progressively less time between kill signals
+					usleep $counter;
+					$counter -= 250_000;
+					$counter = 250_000 if $counter < 250_000;
 				}
-				carp("Sending $signal to $parent") unless $opts{quiet};
-				kill($signal, $parent);
+				
 				exit(252);
 			}
 			
