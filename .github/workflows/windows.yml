@@ -16,6 +16,7 @@ jobs:
       AUTOMATED_TESTING: 1
       RELEASE_TESTING: 0
       GITHUB_WINDOWS_TESTING: 1
+      PERL_SIGNALS: unsafe
 
     runs-on: windows-latest
 
