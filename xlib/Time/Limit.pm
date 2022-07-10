@@ -44,8 +44,11 @@ sub import
 				while ( kill(0, $parent) )
 				{
 					# Send it a signal to end
-					my $signal = ($counter > 1_000_000) ? 'TERM' : 'KILL';
-					$signal = -$signal if $opts{group};
+					my $signal = ($counter > 1_000_000) ? 15 : 9;
+					if ($opts{group}) {
+						carp("Sending -$signal to $parent") unless $opts{quiet};
+						kill(-$signal, $parent);
+					}
 					carp("Sending $signal to $parent") unless $opts{quiet};
 					kill($signal, $parent);
 					
