@@ -118,12 +118,7 @@ STUBS
 
 use POSIX ();
 
-sub extra {
-  return 0;
-}
-
 sub _map_fds {
-  return "FAKE";
    my $map = '';
    my $digit = 0;
    my $in_use;

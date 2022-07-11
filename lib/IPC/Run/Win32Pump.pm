@@ -46,7 +46,8 @@ BEGIN {
     ## when not debugging, we do it manually in order to not even
     ## load IPC::Run::Debug.
     if ($debug) {
-        use IPC::Run::Debug qw( :default _debug_init );
+        eval "use IPC::Run::Debug qw( :default _debug_init ); 1;"
+          or die $@;
     }
     else {
         eval <<STUBS_END or die $@;
