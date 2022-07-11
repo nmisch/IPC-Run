@@ -1014,6 +1014,8 @@ use strict;
 use warnings FATAL => "uninitialized";;
 use Exporter ();
 use vars qw{$VERSION @ISA @FILTER_IMP @FILTERS @API @EXPORT_OK %EXPORT_TAGS};
+use Data::Dumper;
+$Data::Dumper::Sortkeys = 1;
 
 BEGIN {
     $VERSION = '20200505.0';
@@ -2845,15 +2847,19 @@ sub start {
             }
         }
     }
+    _debug 'spawned all kids', $@ if _debugging;
 
     ## Close all those temporary filehandles that the kids needed.
     for my $pty ( values %{ $self->{PTYS} } ) {
         close $pty->slave;
     }
+    _debug 'closed PTYs', $@ if _debugging;
 
     my @closed;
     for my $kid ( @{ $self->{KIDS} } ) {
         for ( @{ $kid->{OPS} } ) {
+          my $tfd = defined $_->{TFD} ? $_->{TFD} : 'other';
+          _debug "op: $tfd" if _debugging;
             my $close_it = eval {
                      defined $_->{TFD}
                   && !$_->{DONT_CLOSE}
