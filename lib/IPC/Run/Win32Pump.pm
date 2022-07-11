@@ -92,7 +92,7 @@ _debug_init(
     $child_label,
 );
 
-_debug "Entered" if _debugging_details;
+_debug "Entered $child_label" if _debugging_details;
 
 # No need to close all fds; win32 doesn't seem to pass any on to us.
 $| = 1;
@@ -124,7 +124,7 @@ while (1) {
     print $buf;
 }
 
-_debug "Exiting, transferred $total_count chars" if _debugging_details;
+_debug "Exiting $child_label, transferred $total_count chars" if _debugging_details;
 
 ## Perform a graceful socket shutdown.  Windows defaults to SO_DONTLINGER,
 ## which should cause a "graceful shutdown in the background" on sockets.
