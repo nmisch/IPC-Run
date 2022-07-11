@@ -118,6 +118,10 @@ STUBS
 
 use POSIX ();
 
+sub extra {
+  return 0;
+}
+
 sub _map_fds {
    my $map = '';
    my $digit = 0;
