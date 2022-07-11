@@ -19,7 +19,7 @@ BEGIN {
 }
 
 use strict;
-use warnings;
+use warnings FATAL => "uninitialized";;
 use Test::More;
 use IPC::Run ();
 

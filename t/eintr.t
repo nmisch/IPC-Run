@@ -9,7 +9,7 @@ eintr.t - Test select() failing with EINTR
 =cut
 
 use strict;
-use warnings;
+use warnings FATAL => "uninitialized";;
 
 BEGIN {
     $|  = 1;

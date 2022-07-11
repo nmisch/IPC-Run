@@ -2,7 +2,7 @@
 
 # Test that our declared minimum Perl version matches our syntax
 use strict;
-use warnings;
+use warnings FATAL => "uninitialized";;
 
 BEGIN {
     $|  = 1;

@@ -1,7 +1,7 @@
 package IPC::Run::Test;
 
 use strict;
-use warnings;
+use warnings FATAL => "uninitialized";;
 use Test::More;
 use Exporter;
 use IPC::Run qw{ harness };

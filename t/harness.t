@@ -9,7 +9,7 @@ harness.t - Test suite for IPC::Run::harness
 =cut
 
 use strict;
-use warnings;
+use warnings FATAL => "uninitialized";;
 
 BEGIN {
     $|  = 1;

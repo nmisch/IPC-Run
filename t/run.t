@@ -9,7 +9,7 @@ run.t - Test suite for IPC::Run::run, etc.
 =cut
 
 use strict;
-use warnings;
+use warnings FATAL => "uninitialized";;
 
 BEGIN {
     $|  = 1;

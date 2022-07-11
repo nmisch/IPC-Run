@@ -27,7 +27,7 @@ It parses a bunch of command line parameters from IPC::Run::Win32IO.
 =cut
 
 use strict;
-use warnings;
+use warnings FATAL => "uninitialized";;
 use vars qw{$VERSION};
 
 BEGIN {

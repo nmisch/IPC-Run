@@ -158,7 +158,7 @@ pragma.
 =cut
 
 use strict;
-use warnings;
+use warnings FATAL => "uninitialized";;
 use Carp;
 use Fcntl;
 use Symbol;

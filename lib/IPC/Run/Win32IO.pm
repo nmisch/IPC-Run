@@ -24,7 +24,7 @@ A specialized IO class used on Win32.
 =cut
 
 use strict;
-use warnings;
+use warnings FATAL => "uninitialized";;
 use Carp;
 use IO::Handle;
 use Socket;

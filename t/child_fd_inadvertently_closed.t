@@ -1,7 +1,7 @@
 #! perl
 
 use strict;
-use warnings;
+use warnings FATAL => "uninitialized";;
 
 use Test::More;
 

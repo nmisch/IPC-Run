@@ -20,7 +20,7 @@ contact me at barries@slaysys.com, thanks!.
 =cut
 
 use strict;
-use warnings;
+use warnings FATAL => "uninitialized";;
 use Carp;
 use IO::Handle;
 use vars qw{ $VERSION @ISA @EXPORT };

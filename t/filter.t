@@ -9,7 +9,7 @@ filter.t - Test suite for IPC::Run filter scaffolding
 =cut
 
 use strict;
-use warnings;
+use warnings FATAL => "uninitialized";;
 
 BEGIN {
     $|  = 1;

@@ -8,7 +8,7 @@
 #
 
 use strict;
-use warnings;
+use warnings FATAL => "uninitialized";;
 
 use IPC::Run 'run';
 use Test::More;

@@ -9,7 +9,7 @@ win32_compile.t - See if IPC::Run::Win32Helper compiles, even on Unix
 =cut
 
 use strict;
-use warnings;
+use warnings FATAL => "uninitialized";;
 
 BEGIN {
     $|  = 1;

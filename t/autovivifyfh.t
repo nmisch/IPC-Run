@@ -1,5 +1,5 @@
 use strict;
-use warnings;
+use warnings FATAL => "uninitialized";;
 
 use IPC::Run;
 use Test::More tests => 3;

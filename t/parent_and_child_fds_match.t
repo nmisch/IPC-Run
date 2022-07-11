@@ -4,7 +4,7 @@
 # was in the parent.
 
 use strict;
-use warnings;
+use warnings FATAL => "uninitialized";;
 
 BEGIN {
     if($ENV{GITHUB_WINDOWS_TESTING}) {

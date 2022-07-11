@@ -37,7 +37,7 @@ command line.
 =cut
 
 use strict;
-use warnings;
+use warnings FATAL => "uninitialized";;
 use Carp;
 
 use overload '""' => sub {

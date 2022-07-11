@@ -9,7 +9,7 @@ signal.t - Test suite IPC::Run->signal
 =cut
 
 use strict;
-use warnings;
+use warnings FATAL => "uninitialized";;
 
 BEGIN {
     $|  = 1;

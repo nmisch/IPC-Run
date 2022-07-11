@@ -1,7 +1,7 @@
 #!perl -w
 
 use strict;
-use warnings;
+use warnings FATAL => "uninitialized";;
 
 use Test::More tests => 11;
 use IPC::Run;

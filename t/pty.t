@@ -26,7 +26,7 @@ further, but I have not the time.
 =cut
 
 use strict;
-use warnings;
+use warnings FATAL => "uninitialized";;
 
 BEGIN {
     $|  = 1;

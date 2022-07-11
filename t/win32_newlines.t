@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 
 use strict;
-use warnings;
+use warnings FATAL => "uninitialized";;
 use B 'perlstring';
 
 sub lines { [ "ab", "\n", "\r", "\r\n", "\n\r" ] }

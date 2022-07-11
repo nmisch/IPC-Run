@@ -9,7 +9,7 @@ adopt.t - Test suite for IPC::Run::adopt
 =cut
 
 use strict;
-use warnings;
+use warnings FATAL => "uninitialized";;
 
 BEGIN {
     $|  = 1;

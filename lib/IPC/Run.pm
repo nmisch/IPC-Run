@@ -1011,7 +1011,7 @@ in their exit codes.
 =cut
 
 use strict;
-use warnings;
+use warnings FATAL => "uninitialized";;
 use Exporter ();
 use vars qw{$VERSION @ISA @FILTER_IMP @FILTERS @API @EXPORT_OK %EXPORT_TAGS};
 
@@ -1048,7 +1048,7 @@ BEGIN {
 }
 
 use strict;
-use warnings;
+use warnings FATAL => "uninitialized";;
 use IPC::Run::Debug;
 use Exporter;
 use Fcntl;
