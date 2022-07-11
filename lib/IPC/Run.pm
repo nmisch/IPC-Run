@@ -1273,6 +1273,7 @@ sub _empty($) { !( defined $_[0] && length $_[0] ) }
 sub _close {
     confess 'undef' unless defined $_[0];
     my $fd = $_[0] =~ /^\d+$/ ? $_[0] : fileno $_[0];
+    _debug "close( $fd ) start" if _debugging_details;
     my $r = POSIX::close $fd;
     $r = $r ? '' : " ERROR $!";
     delete $fds{$fd};
