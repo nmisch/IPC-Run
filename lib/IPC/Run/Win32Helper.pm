@@ -25,6 +25,7 @@ use Carp;
 use IO::Handle;
 use vars qw{ $VERSION @ISA @EXPORT };
 use Data::Dumper;
+$Data::Dumper::Sortkeys = 1;
 
 BEGIN {
     $VERSION = '20200505.0';
