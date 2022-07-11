@@ -536,6 +536,7 @@ sub win32_spawn {
 
     for my $orig_fd ( keys %saved ) {
         IPC::Run::_dup2_rudely( $saved{$orig_fd}, $orig_fd );
+        _debug "should not block $orig_fd" if _debugging_details;
         IPC::Run::_close( $saved{$orig_fd} );
     }
 
