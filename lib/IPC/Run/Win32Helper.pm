@@ -24,6 +24,7 @@ use warnings;
 use Carp;
 use IO::Handle;
 use vars qw{ $VERSION @ISA @EXPORT };
+use Data::Dumper;
 
 BEGIN {
     $VERSION = '20200505.0';
@@ -483,6 +484,8 @@ sub win32_spawn {
     ## parent's fd happened to be saved to.
 
     for my $op (@$ops) {
+        _debug "op: ", Dumper($op)
+            if _debugging;
         _dont_inherit $op->{FD} if defined $op->{FD};
 
         if ( defined $op->{KFD} && $op->{KFD} > 2 ) {

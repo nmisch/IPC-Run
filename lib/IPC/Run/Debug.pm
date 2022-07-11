@@ -227,6 +227,8 @@ sub _debug_init {
 sub _debug {
 #   return unless _debugging || _debugging_not_optimized;
 
+   my($pkg, $file, $line, $subr) = caller 1;
+
    my $fd = defined &IPC::Run::_debug_fd
       ? IPC::Run::_debug_fd()
       : fileno STDERR;
@@ -243,12 +245,10 @@ sub _debug {
       defined $debug_name && length $debug_name ? $debug_name        : (),
    );
    my $prefix = join(
-      "",
-      "IPC::Run",
       sprintf( " %04d", time - $^T ),
       ( _debugging_details ? ( " ", _map_fds ) : () ),
       length $debug_id ? ( " [", $debug_id, "]" ) : (),
-      ": ",
+      " $subr:$line: ",  # FIXME why does the time appear thrice?
    );
 
    my $msg = join( '', map defined $_ ? $_ : "<undef>", @_ );
