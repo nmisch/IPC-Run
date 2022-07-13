@@ -940,6 +940,7 @@ SKIP: {
 }
 
 for (1 .. 100) {
+  local $ENV{SLEEP_AFTER_CREATE_PROCESS} = 1;
 
 ##
 ## Pipelining
