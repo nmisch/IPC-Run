@@ -38,7 +38,7 @@ sub get_warnings {
 select STDERR;
 select STDOUT;
 
-use Test::More tests => 7020;
+use Test::More tests => 288;
 use IPC::Run::Debug qw( _map_fds );
 use IPC::Run qw( :filters :filter_imp start );
 
@@ -939,9 +939,6 @@ SKIP: {
     eok( $err, uc($text) );
 }
 
-for (1 .. 100) {
-  local $ENV{SLEEP_AFTER_CREATE_PROCESS} = 1;
-
 ##
 ## Pipelining
 ##
@@ -1028,10 +1025,14 @@ $out    = 'REPLACE ME';
 $err    = 'REPLACE ME';
 $?      = 99;
 $fd_map = _map_fds;
+{
+  local $ENV{SLEEP_AFTER_CREATE_PROCESS} = 1;
+
 $h      = start(
     [ @perl, '-pe', 'BEGIN { $| = 1 } print STDERR uc($_)' ],
     \$in, \$out, \$err,
 );
+}
 isa_ok( $h, 'IPC::Run' );
 is( $?, 99 );
 
@@ -1091,7 +1092,6 @@ eok( $in,  '' );
 eok( $out, $text );
 eok( $err, uc($text) );
 ok( !$h->pumpable );
-}
 
 $in  = $text;
 $out = 'REPLACE ME';
