@@ -2873,6 +2873,7 @@ sub start {
             }
             if ( $close_it || $@ ) {
                 eval {
+                    _dup2_rudely( 2, $_->{TFD} );
                     _close( $_->{TFD} );
                     $closed[ $_->{TFD} ] = 1;
                     $_->{TFD} = undef;
