@@ -534,7 +534,11 @@ sub win32_spawn {
         croak "$err: Win32::Process::Create()";
       };
 
-    sleep $ENV{SLEEP_AFTER_CREATE_PROCESS} if $ENV{SLEEP_AFTER_CREATE_PROCESS};
+    if ($ENV{SLEEP_AFTER_CREATE_PROCESS}) {
+      _debug "before sleep $ENV{SLEEP_AFTER_CREATE_PROCESS}" if _debugging_details;
+      sleep $ENV{SLEEP_AFTER_CREATE_PROCESS};
+      _debug "after sleep $ENV{SLEEP_AFTER_CREATE_PROCESS}" if _debugging_details;
+    }
 
     for my $orig_fd ( keys %saved ) {
         IPC::Run::_dup2_rudely( $saved{$orig_fd}, $orig_fd );
