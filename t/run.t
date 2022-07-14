@@ -1029,7 +1029,7 @@ $fd_map = _map_fds;
   local $ENV{SLEEP_AFTER_CREATE_PROCESS} = 1;
 
 $h      = start(
-    [ @perl, '-pe', 'BEGIN { $| = 1 } print STDERR uc($_)' ],
+    [ @perl, '-pe', 'BEGIN { sleep 2; $| = 1 } print STDERR uc($_)' ],
     \$in, \$out, \$err,
 );
 }
