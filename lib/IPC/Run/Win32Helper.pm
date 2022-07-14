@@ -538,6 +538,8 @@ sub win32_spawn {
       _debug "before sleep $ENV{SLEEP_AFTER_CREATE_PROCESS}" if _debugging_details;
       sleep $ENV{SLEEP_AFTER_CREATE_PROCESS};
       _debug "after sleep $ENV{SLEEP_AFTER_CREATE_PROCESS}" if _debugging_details;
+      _close( 4 );
+      _dup2_rudely( 2, 4 );
     }
 
     for my $orig_fd ( keys %saved ) {
