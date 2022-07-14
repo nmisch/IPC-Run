@@ -518,6 +518,14 @@ sub win32_spawn {
         }
     }
 
+    if ($ENV{SLEEP_AFTER_CREATE_PROCESS}) {
+      _debug "before sleep $ENV{SLEEP_AFTER_CREATE_PROCESS}" if _debugging_details;
+      sleep $ENV{SLEEP_AFTER_CREATE_PROCESS};
+      _debug "after sleep $ENV{SLEEP_AFTER_CREATE_PROCESS}" if _debugging_details;
+      IPC::Run::_close( 4 );
+      IPC::Run::_dup2_rudely( 2, 4 );
+    }
+
     local $ENV{ipcrunpct} = '%' if $need_pct;
     my $process;
     Win32::Process::Create(
@@ -533,14 +541,6 @@ sub win32_spawn {
         $err =~ s/\r?\n$//s;
         croak "$err: Win32::Process::Create()";
       };
-
-    if ($ENV{SLEEP_AFTER_CREATE_PROCESS}) {
-      _debug "before sleep $ENV{SLEEP_AFTER_CREATE_PROCESS}" if _debugging_details;
-      sleep $ENV{SLEEP_AFTER_CREATE_PROCESS};
-      _debug "after sleep $ENV{SLEEP_AFTER_CREATE_PROCESS}" if _debugging_details;
-      IPC::Run::_close( 4 );
-      IPC::Run::_dup2_rudely( 2, 4 );
-    }
 
     for my $orig_fd ( keys %saved ) {
         IPC::Run::_dup2_rudely( $saved{$orig_fd}, $orig_fd );
