@@ -71,6 +71,8 @@ use warnings FATAL => "uninitialized";;
 use Exporter;
 use vars qw{$VERSION @ISA @EXPORT @EXPORT_OK %EXPORT_TAGS};
 
+use constant Win32_MODE => $^O =~ /os2|Win32/i;
+
 BEGIN {
     $VERSION = '20200505.0';
     @ISA     = qw( Exporter );
@@ -118,21 +120,33 @@ STUBS
 
 use POSIX ();
 
-sub _map_fds {
-  return "FAKE";
-   my $map = '';
-   my $digit = 0;
-   my $in_use;
-   my $dummy;
-   for my $fd (0..63) {
+sub _fd_is_open {
+   my($fd) = @_;
+   if (Win32_MODE) {
+      # FIXME Many OS functions crash.  POSIX::close() can hang.  Borrow
+      # gnulib's strategy of testing whether a file is open.
+      require Win32API::File;
+      return Win32API::File::FdGetOsFHandle($fd) != Win32API::File::INVALID_HANDLE_VALUE();
+   } else {
       ## I'd like a quicker way (less user, cpu & especially sys and kernel
       ## calls) to detect open file descriptors.  Let me know...
       ## Hmmm, could do a 0 length read and check for bad file descriptor...
       ## but that segfaults on Win32
+      ## FIXME no longer used on win32
+      ## FIXME maybe put this first
       my $test_fd = POSIX::dup( $fd );
-      $in_use = defined $test_fd;
+      my $in_use = defined $test_fd;
       POSIX::close $test_fd if $in_use;
-      $map .= $in_use ? $digit : '-';
+      return $in_use;
+   }
+}
+
+sub _map_fds {
+   my $map = '';
+   my $digit = 0;
+   my $dummy;
+   for my $fd (0..63) {
+      $map .= _fd_is_open($fd) ? $digit : '-';
       $digit = 0 if ++$digit > 9;
    }
    warn "No fds open???" unless $map =~ /\d/;
