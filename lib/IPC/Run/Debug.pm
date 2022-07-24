@@ -119,6 +119,7 @@ STUBS
 use POSIX ();
 
 sub _map_fds {
+   return "FIXME";
    my $map = '';
    my $digit = 0;
    my $in_use;

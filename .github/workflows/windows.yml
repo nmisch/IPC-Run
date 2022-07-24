@@ -16,6 +16,9 @@ jobs:
       AUTOMATED_TESTING: 1
       RELEASE_TESTING: 0
       GITHUB_WINDOWS_TESTING: 1
+      IPCRUNDEBUG: details
+      HARNESS_VERBOSE: true
+      HARNESS_TIMER: true
 
     runs-on: windows-latest
 
@@ -26,9 +29,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@master
+      - run: dir c:\msys64\usr\bin 
       - name: perl -V
         run: perl -V
       - name: Makefile.PL
         run: perl Makefile.PL
       - name: make test
-        run: make test
+        run: c:\msys64\usr\bin\timeout -k190 40 make test
