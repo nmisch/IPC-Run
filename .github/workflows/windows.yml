@@ -31,4 +31,4 @@ jobs:
       - name: Makefile.PL
         run: perl Makefile.PL
       - name: make test
-        run: make test
+        run: c:\msys64\usr\bin\timeout -k190 40 make test
