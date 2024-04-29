@@ -34,16 +34,19 @@ else {
 
 # Test 1
 SCOPE: {
+    my $out;
     my $h = IPC::Run::start(
         [
             $^X,
             '-e',
-            'sleep while 1',
-        ]
+            '$SIG{TERM}="DEFAULT";$|=1;print "running\n";sleep while 1',
+        ],
+        \undef,
+        \$out
     );
-
+    pump $h until $out =~ /running/;
     my $needed = $h->kill_kill;
-    ok( !$needed, 'Did not need kill_kill' );
+    ok( !$needed, 'kill_kill SIGTERM suffices for ordinary command' );
 }
 
 # Test 2
@@ -64,5 +67,5 @@ SKIP: {
     );
     pump $h until $out =~ /running/;
     my $needed = $h->kill_kill( grace => 1 );
-    ok( $needed, 'Did need kill_kill' );
+    ok( $needed, 'kill_kill of SIGINT-ignoring command needs SIGKILL' );
 }
