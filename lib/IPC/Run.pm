@@ -1798,10 +1798,15 @@ sub kill_kill {
 
         $self->reap_nb;
         last unless $self->_running_kids;
+        _debug "running_kids remain"
+          if _debugging;
 
         if ( $accum_delay >= $grace * 0.8 ) {
             ## No point in checking until delay has grown some.
-            if ( time >= $quitting_time ) {
+            my $t = time;
+            if ( $t >= $quitting_time ) {
+                _debug "$t >= $quitting_time"
+                    if _debugging;
                 if ( !$have_killed_before ) {
                     $self->signal($coup_d_grace);
                     $have_killed_before = 1;

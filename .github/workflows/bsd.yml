@@ -48,6 +48,6 @@ jobs:
             curl -L https://cpanmin.us | sudo perl - --notest --installdeps --with-configure --with-develop .
             perl Makefile.PL
             make
-            ktrace -di perl -Iblib/lib t/kill_kill.t || true
+            ktrace -di env IPCRUNDEBUG=gory perl -Iblib/lib t/kill_kill.t || true
             kdump || true
             prove -wlvmb t
