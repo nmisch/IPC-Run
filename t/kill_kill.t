@@ -38,7 +38,7 @@ SCOPE: {
         [
             $^X,
             '-e',
-            '$SIG{TERM}="DEFAULT";sleep while 1',
+            '$SIG{TERM}=sub{exit 1};sleep while 1',
         ]
     );
 
