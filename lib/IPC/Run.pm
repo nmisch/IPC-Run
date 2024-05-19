@@ -1785,7 +1785,8 @@ sub kill_kill {
 	$self->signal("TERM");
     }
 
-    my $quitting_time = time + $grace;
+    my $orig_time = time;
+    my $quitting_time = $orig_time + $grace;
     my $delay         = 0.01;
     my $accum_delay;
 
@@ -1798,7 +1799,7 @@ sub kill_kill {
 
         $self->reap_nb;
         last unless $self->_running_kids;
-        print STDERR "running_kids remain\n";
+        print STDERR "running_kids remain $accum_delay+=$delay $orig_time..$quitting_time\n";
 
         if ( $accum_delay >= $grace * 0.8 ) {
             ## No point in checking until delay has grown some.
@@ -1814,6 +1815,9 @@ sub kill_kill {
                     next;
                 }
                 croak "Unable to reap all children, even after KILLing them";
+            }
+            else {
+                print STDERR "$t < $quitting_time\n";
             }
         }
 
