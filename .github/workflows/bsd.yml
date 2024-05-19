@@ -45,9 +45,9 @@ jobs:
           run: |
             sudo ${{ matrix.os.pkginstall }}
             /usr/sbin/pkg_info || true
-            ktrace perl -e 'alarm 1;sleep while 1' || true
-            kdump || true
             curl -L https://cpanmin.us | sudo perl - --notest --installdeps --with-configure --with-develop .
             perl Makefile.PL
             make
+            ktrace -di perl -Iblib/lib t/kill_kill.t || true
+            kdump || true
             prove -wlvmb t
