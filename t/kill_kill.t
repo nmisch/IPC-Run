@@ -39,7 +39,7 @@ SCOPE: {
         [
             $^X,
             '-e',
-            '$SIG{TERM}="DEFAULT";$|=1;print "running\n";sleep while 1',
+            '$|=1;print "running\n";sleep while 1',
         ],
         \undef,
         \$out
