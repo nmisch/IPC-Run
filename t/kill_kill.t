@@ -38,11 +38,16 @@ SCOPE: {
         [
             $^X,
             '-e',
-            'sleep while 1',
+            '
+use POSIX;
+my $new = POSIX::SigSet->new(&POSIX::SIGTERM);
+POSIX::sigprocmask(&POSIX::SIG_UNBLOCK, $new);
+sleep while 1
+',
         ]
     );
 
-    my $needed = $h->kill_kill;
+    my $needed = $h->kill_kill;#( grace => 3 );
     ok( !$needed, 'Did not need kill_kill' );
 }
 
