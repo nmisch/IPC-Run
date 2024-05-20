@@ -56,5 +56,5 @@ jobs:
             perl Makefile.PL
             make
             ktrace -di env IPCRUNDEBUG=gory perl -Iblib/lib t/kill_kill.t || true
-            kdump || true
+            kdump -dE -m128 || true
             IPCRUNDEBUG=gory prove -wlvmb t/kill_kill.t
