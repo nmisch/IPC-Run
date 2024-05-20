@@ -1460,9 +1460,11 @@ sub _exec {
     #   exec @_ or croak "$!: exec( " . join( ', ', @_ ) . " )";
     _debug 'exec()ing ', join " ", map "'$_'", @_ if _debugging_details;
 
-    my $new = POSIX::SigSet->new(&POSIX::SIGTERM);
-    POSIX::sigprocmask(&POSIX::SIG_BLOCK, $new);
-    sleep 1;
+    if (grep /sigprocmask/, @_) {
+      my $new = POSIX::SigSet->new(&POSIX::SIGTERM);
+      POSIX::sigprocmask(&POSIX::SIG_BLOCK, $new);
+      sleep 3;
+    }
 
     #   {
 ## Commented out since we don't call this on Win32.
