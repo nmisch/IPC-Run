@@ -1463,7 +1463,6 @@ sub _exec {
     if (grep /sigprocmask/, @_) {
       my $new = POSIX::SigSet->new(&POSIX::SIGTERM);
       POSIX::sigprocmask(&POSIX::SIG_BLOCK, $new);
-      sleep 3;
     }
 
     #   {

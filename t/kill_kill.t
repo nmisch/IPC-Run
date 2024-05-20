@@ -40,6 +40,7 @@ SCOPE: {
             '-e',
             '
 use POSIX;
+sleep 3;
 my $new = POSIX::SigSet->new(&POSIX::SIGTERM);
 POSIX::sigprocmask(&POSIX::SIG_UNBLOCK, $new);
 sleep while 1
