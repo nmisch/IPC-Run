@@ -1,3 +1,9 @@
+/*
+ * Return value:
+ * 1 if sigprocmask(SIG_UNBLOCK) returns w/ SIGTERM pending
+ * 2 if sigprocmask(SIG_UNBLOCK) returns w/ SIGTERM *not* pending
+ * 90 if exec fails
+ */
 #include <signal.h>
 #include <unistd.h>
 #include <stdlib.h>
@@ -17,7 +23,7 @@ int main(int argc, char **argv)
 	raise(SIGTERM);
 
 	execv(argv[0], cmd);
-	return 1;
+	return 90;
     }
     else
     {
@@ -32,6 +38,7 @@ int main(int argc, char **argv)
 #endif
 	write(2, msg, sizeof(msg) - 1);
 	sigprocmask(SIG_UNBLOCK, &set, NULL);
-	return 0;
+	sigpending(&set);
+	return sigismember(&set, SIGTERM) ? 1 : 2;
     }
 }
