@@ -49,6 +49,7 @@ jobs:
             seq --version ||true
             cc -Wall -xc pending_signal_c ||true
             for n in `seq 15`; do ./a.out || echo $?; done
+            uname -a
             echo BARRIER1
             cc -DREBLOCK -Wall -xc pending_signal_c ||true
             for n in `seq 15`; do ./a.out || echo $?; done
