@@ -46,12 +46,12 @@ jobs:
             sudo ${{ matrix.os.pkginstall }}
             /usr/sbin/pkg_info || true
             curl -L https://cpanmin.us | sudo perl - --notest --installdeps --with-configure --with-develop .
-            perl Makefile.PL
-            make
             gcc -Wall -xc pending_signal_c && for n in `seq 15`; do ./a.out; echo $?; done
             echo BARRIER1
             gcc -DREBLOCK -Wall -xc pending_signal_c && for n in `seq 15`; do ./a.out; echo $?; done
             echo BARRIER2
+            perl Makefile.PL
+            make
             ktrace -di env IPCRUNDEBUG=gory perl -Iblib/lib t/kill_kill.t || true
             kdump || true
             IPCRUNDEBUG=gory prove -wlvmb t/kill_kill.t
