@@ -14,8 +14,7 @@
  * OpenBSD 7.5
  * Solaris 11.4.68.164.2
  *
- * NetBSD 10.0: returns 2 always.
- * NetBSD 9.4: returns 2 always.
+ * NetBSD 10.0, 9.4, 9.2: returns 2 always.
  *
  * Linux 3.10.0-1160.99.1.el7.x86_64: Dies to SIGTERM about half the time,
  * returning 1 the other half.  Compiling with -DREBLOCK makes it die to SIGTERM
