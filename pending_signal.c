@@ -4,8 +4,19 @@
  * 2 if sigprocmask(SIG_UNBLOCK) returns w/ SIGTERM *not* pending
  * 90 if exec fails
  *
- * Dies to SIGTERM about half the time, returning 1 the other half.  Compiling
- * with -DREBLOCK makes it die to SIGTERM always.
+ * Linux 3.10.0-1160.99.1.el7.x86_64: Dies to SIGTERM about half the time,
+ * returning 1 the other half.  Compiling with -DREBLOCK makes it die to SIGTERM
+ * always.
+ *
+ * AIX 7300-01-02-2320: returns 1 always.  Compiling with -DREBLOCK makes it die
+ * to SIGTERM always.
+ *
+ * Same as AIX:
+ * Darwin 21.6.0
+ * FreeBSD 14.0-CURRENT
+ * Linux 6.7.12-amd64
+ * OpenBSD 7.5
+ * Solaris 11.4.68.164.2
  */
 #include <signal.h>
 #include <unistd.h>
