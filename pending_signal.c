@@ -14,6 +14,7 @@ int main(int argc, char **argv)
 	sigemptyset(&set);
 	sigaddset(&set, SIGTERM);
 	sigprocmask(SIG_BLOCK, &set, NULL);
+	raise(SIGTERM);
 
 	execv(argv[0], cmd);
 	return 1;
@@ -29,7 +30,6 @@ int main(int argc, char **argv)
 	sigaddset(&set, SIGTERM);
 	sigprocmask(SIG_BLOCK, &set, NULL);
 #endif
-	raise(SIGTERM);
 	write(2, msg, sizeof(msg) - 1);
 	sigprocmask(SIG_UNBLOCK, &set, NULL);
 	return 0;
